@@ -35,7 +35,6 @@ import androidx.test.filters.SmallTest;
 
 import com.android.systemui.SysuiTestCase;
 import com.android.systemui.broadcast.BroadcastDispatcher;
-import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.tuner.TunerService;
 
@@ -59,8 +58,6 @@ public class BatteryMeterViewControllerTest extends SysuiTestCase {
     private Handler mHandler;
     @Mock
     private ContentResolver mContentResolver;
-    @Mock
-    private BatteryController mBatteryController;
 
     private BatteryMeterViewController mController;
 
@@ -77,8 +74,7 @@ public class BatteryMeterViewControllerTest extends SysuiTestCase {
                 mTunerService,
                 mBroadcastDispatcher,
                 mHandler,
-                mContentResolver,
-                mBatteryController
+                mContentResolver
         );
     }
 
@@ -96,7 +92,6 @@ public class BatteryMeterViewControllerTest extends SysuiTestCase {
                 anyBoolean(),
                 any()
         );
-        verify(mBatteryController).addCallback(any());
     }
 
     @Test
@@ -109,7 +104,6 @@ public class BatteryMeterViewControllerTest extends SysuiTestCase {
         verify(mConfigurationController).removeCallback(any());
         verify(mTunerService).removeTunable(any());
         verify(mContentResolver).unregisterContentObserver(any());
-        verify(mBatteryController).removeCallback(any());
     }
 
     @Test
